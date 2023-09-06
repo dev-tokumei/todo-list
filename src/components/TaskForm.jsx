@@ -1,23 +1,7 @@
-import React, { useState } from "react";
-import { BsCheck } from "react-icons/bs";
+import React from "react";
 import { RiAddFill } from "react-icons/ri";
 
-const TaskForm = ({
-  onAdd,
-  newTask,
-  setNewTask,
-  edit,
-  setEdit,
-  previousTitle,
-  previousDescription,
-}) => {
-  // const [newTask, setNewTask] = useState({
-  //   title: "",
-  //   description: "",
-  //   id: "",
-  //   complited: false,
-  // });
-
+const TaskForm = ({ onAdd, newTask, setNewTask }) => {
   const handleAdd = () => {
     if (newTask.description === " " || newTask.title === "") {
       return alert("Пожалуйса заполните все формы");
@@ -38,7 +22,7 @@ const TaskForm = ({
         className="w-[50%] mr-5 h-[45px] rounded-xl pl-3 bg-gray-700  border-2 border-solid] text-white"
         type="text"
         placeholder="Названия"
-        value={newTask.title || previousTitle}
+        value={newTask.title || ""}
         onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
         onKeyDown={onKeyDown}
       />
@@ -47,29 +31,20 @@ const TaskForm = ({
         className="w-[50%] mr-5 h-[45px] rounded-xl pl-3 bg-gray-700  border-2 border-solid]  text-white"
         type="text"
         placeholder="Описания"
-        value={newTask.description || previousDescription}
+        value={newTask.description || ""}
         onChange={(e) =>
           setNewTask({ ...newTask, description: e.target.value })
         }
       />
 
       <div className=" ">
-        {edit ? (
-          <button
-            onClick={() => setEdit(!edit)}
-            className="w-[50px] h-[50px] rounded-full bg-green-600 text-white flex justify-center items-center mr-5 hover:bg-green-500 transition-colors duration-300 ease-in-out"
-          >
-            <BsCheck size={35} />
-          </button>
-        ) : (
-          <button
-            onKeyDown={onKeyDown}
-            onClick={handleAdd}
-            className="w-[50px] h-[50px] rounded-full bg-green-600 text-white  flex justify-center items-center mr-5 hover:bg-green-500 transition-colors duration-300 ease-in-out"
-          >
-            <RiAddFill size={30} />
-          </button>
-        )}
+        <button
+          onKeyDown={onKeyDown}
+          onClick={handleAdd}
+          className="w-[50px] h-[50px] rounded-full bg-green-600 text-white  flex justify-center items-center mr-5 hover:bg-green-500 transition-colors duration-300 ease-in-out"
+        >
+          <RiAddFill size={30} />
+        </button>
       </div>
     </div>
   );

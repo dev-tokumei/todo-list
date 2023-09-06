@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Filter = ({ showAllTasks, showCompletedTasks, showIncompleteTasks }) => {
-  const [show, setShow] = useState(false);
+const Filter = ({
+  show,
+  setShow,
+  showAllTasks,
+  showCompletedTasks,
+  showIncompleteTasks,
+}) => {
   return (
     <div>
       <button
-        className="flex items-center justify-between text-white w-[150px] h-[40px] bg-gray-800 p-2 rounded-md  hover:bg-gray-700 transition-colors duration-300 ease-in-out"
+        className="flex items-center mobile_pt justify-between text-white w-[150px] h-[40px] bg-gray-800 p-2 rounded-md  hover:bg-gray-700 transition-colors duration-300 ease-in-out"
         onClick={() => setShow(!show)}
       >
         Filter

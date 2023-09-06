@@ -20,3 +20,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@media  (max-width: 700px) {
+  .mobile_size {
+    width: 100% !important;
+    
+  }
+}
+
+
+@media  (max-width: 600px) {
+  .mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+  }
+  .mobile_pt {
+    margin-top: 20px;
+  }
+  .mobile_size {
+    width: 100% !important;
+
+  }
+}

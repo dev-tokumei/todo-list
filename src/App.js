@@ -6,17 +6,10 @@ import Filter from "./components/Filter";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState([]);
   const [filter, setFilter] = useState("all");
   const [searchText, setSearchText] = useState("");
-  const [edit, setEdit] = useState(false);
-  const [previousTitle, setPreviousTitle] = useState("");
-  const [previousDescription, setPreviousDescription] = useState("");
-  const [newTask, setNewTask] = useState({
-    title: "",
-    description: "",
-    id: "",
-    complited: false,
-  });
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -36,19 +29,6 @@ const App = () => {
     setTasks(add);
     localStorage.setItem("tasks", JSON.stringify(add));
   };
-
-  const editTask = (id) => {
-    setEdit(true);
-    const updatedTasks = [...tasks];
-    const taskToEdit = updatedTasks.find((task) => task.id === id);
-    setPreviousTitle(taskToEdit.title);
-    taskToEdit.title = previousTitle;
-    setPreviousDescription(taskToEdit.description);
-    taskToEdit.description = previousDescription;
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-  };
-
   const changeTask = (id) => {
     const copy = [...tasks];
     const current = copy.find((t) => t.id === id);
@@ -101,18 +81,12 @@ const App = () => {
           handleSearchChange={handleSearchChange}
         />
       </div>
-      <div className="px-5 w-full h-100 pt-[150px] flex flex-col justify-center bg-gray-900">
+      <div className="px-5 w-full h-100 pt-[150px] flex flex-col justify-center bg-gray-900 container mx-auto">
         <div className="w-full flex justify-between items-center">
-          <TaskForm
-            onAdd={addTask}
-            newTask={newTask}
-            setNewTask={setNewTask}
-            edit={edit}
-            setEdit={setEdit}
-            previousTitle={previousTitle}
-            previousDescription={previousDescription}
-          />
+          <TaskForm onAdd={addTask} newTask={newTask} setNewTask={setNewTask} />
           <Filter
+            show={show}
+            setShow={setShow}
             showAllTasks={showAllTasks}
             showCompletedTasks={showCompletedTasks}
             showIncompleteTasks={showIncompleteTasks}
@@ -132,7 +106,6 @@ const App = () => {
               key={todo.id}
               changeTask={changeTask}
               removeTask={removeTask}
-              editTask={editTask}
             />
           ))}
         </div>
